@@ -1,6 +1,6 @@
 import React from 'react';
 import { useAuth } from '../context/AuthContext';
-import { X, History, FileText, Trash2, Shield, Calendar, User as UserIcon } from 'lucide-react';
+import { X, History, FileText, Trash2, Shield, Calendar, User as UserIcon, Download } from 'lucide-react';
 
 interface UserHistoryModalProps {
   isOpen: boolean;
@@ -31,6 +31,46 @@ export const UserHistoryModal: React.FC<UserHistoryModalProps> = ({ isOpen, onCl
     } catch {
       return dateStr;
     }
+  };
+
+  const handleExportCSV = () => {
+    if (history.length === 0) return;
+    const headers = ['ID', 'File Name', 'Size (Bytes)', 'Unlocked At'];
+    const rows = history.map(item => [
+      `"${item.id}"`,
+      `"${item.fileName.replace(/"/g, '""')}"`,
+      item.fileSize,
+      `"${item.unlockedAt}"`
+    ]);
+
+    const csvContent = [headers.join(','), ...rows.map(r => r.join(','))].join('\n');
+    const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = `unpdf_history_${Date.now()}.csv`;
+    document.body.appendChild(link);
+    link.click();
+    setTimeout(() => {
+      document.body.removeChild(link);
+      URL.revokeObjectURL(url);
+    }, 1000);
+  };
+
+  const handleExportJSON = () => {
+    if (history.length === 0) return;
+    const jsonString = JSON.stringify(history, null, 2);
+    const blob = new Blob([jsonString], { type: 'application/json' });
+    const url = URL.createObjectURL(blob);
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = `unpdf_history_${Date.now()}.json`;
+    document.body.appendChild(link);
+    link.click();
+    setTimeout(() => {
+      document.body.removeChild(link);
+      URL.revokeObjectURL(url);
+    }, 1000);
   };
 
   return (
@@ -71,16 +111,39 @@ export const UserHistoryModal: React.FC<UserHistoryModalProps> = ({ isOpen, onCl
               <History size={18} className="history-icon" />
               <h4 id="history-section-title">Unlocked Files ({history.length})</h4>
             </div>
+
             {history.length > 0 && (
-              <button 
-                type="button" 
-                className="clear-history-btn"
-                onClick={clearHistory}
-                id="btn-clear-user-history"
-              >
-                <Trash2 size={14} />
-                <span>Clear history</span>
-              </button>
+              <div className="history-header-actions" style={{ display: 'flex', gap: '0.4rem' }}>
+                <button 
+                  type="button" 
+                  className="export-btn"
+                  onClick={handleExportCSV}
+                  title="Export history to CSV"
+                  id="btn-export-csv"
+                >
+                  <Download size={13} />
+                  <span>CSV</span>
+                </button>
+                <button 
+                  type="button" 
+                  className="export-btn"
+                  onClick={handleExportJSON}
+                  title="Export history to JSON"
+                  id="btn-export-json"
+                >
+                  <Download size={13} />
+                  <span>JSON</span>
+                </button>
+                <button 
+                  type="button" 
+                  className="clear-history-btn"
+                  onClick={clearHistory}
+                  id="btn-clear-user-history"
+                >
+                  <Trash2 size={14} />
+                  <span>Clear</span>
+                </button>
+              </div>
             )}
           </div>
 
@@ -117,3 +180,4 @@ export const UserHistoryModal: React.FC<UserHistoryModalProps> = ({ isOpen, onCl
     </div>
   );
 };
+

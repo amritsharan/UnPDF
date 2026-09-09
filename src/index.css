@@ -1406,4 +1406,548 @@ h1, h2, h3, h4 {
   line-height: 1.45;
 }
 
+/* ==========================================================================
+   Mode Switcher Tabs (Unlock vs Encrypt)
+   ========================================================================== */
+.mode-switcher-tabs {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  padding: 4px;
+  border-radius: 14px;
+  margin: 1rem auto 1.5rem auto;
+  max-width: 450px;
+}
+
+.mode-tab-btn {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  font-family: var(--font-heading);
+  font-weight: 600;
+  font-size: 0.9rem;
+  padding: 0.65rem 1rem;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.mode-tab-btn:hover {
+  color: var(--text-primary);
+  background: rgba(255, 255, 255, 0.04);
+}
+
+.mode-tab-btn.active {
+  background: linear-gradient(135deg, var(--color-violet), #6366f1);
+  color: #ffffff;
+  box-shadow: 0 4px 15px rgba(139, 92, 246, 0.3);
+}
+
+/* ==========================================================================
+   Batch Action Toolbar & Queue Filters
+   ========================================================================== */
+.batch-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  flex-wrap: wrap;
+  background: rgba(139, 92, 246, 0.06);
+  border: 1px solid rgba(139, 92, 246, 0.15);
+  border-radius: var(--radius-md);
+  padding: 0.8rem 1rem;
+  margin-bottom: 1rem;
+}
+
+.master-password-form {
+  display: flex;
+  align-items: center;
+  gap: 0.6rem;
+  flex: 1;
+  min-width: 280px;
+}
+
+.batch-icon {
+  color: var(--color-violet);
+  flex-shrink: 0;
+}
+
+.btn-download-zip {
+  background: linear-gradient(135deg, var(--color-emerald), #059669) !important;
+  color: #ffffff !important;
+}
+
+.queue-filter-group {
+  display: flex;
+  align-items: center;
+  gap: 1.2rem;
+  flex-wrap: wrap;
+}
+
+.filter-pills {
+  display: flex;
+  gap: 0.3rem;
+  background: rgba(255, 255, 255, 0.03);
+  padding: 3px;
+  border-radius: 20px;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.filter-pill {
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  font-size: 0.78rem;
+  font-weight: 500;
+  padding: 0.25rem 0.65rem;
+  border-radius: 16px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.filter-pill:hover {
+  color: var(--text-primary);
+}
+
+.filter-pill.active {
+  background: rgba(255, 255, 255, 0.12);
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+.export-btn {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: var(--text-secondary);
+  font-size: 0.75rem;
+  padding: 0.25rem 0.6rem;
+  border-radius: 6px;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  transition: all 0.2s ease;
+}
+
+.export-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--text-primary);
+}
+
+/* ==========================================================================
+   PDF Preview & Inspector Modal
+   ========================================================================== */
+.preview-modal-card {
+  background: rgba(18, 18, 24, 0.98);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: var(--radius-lg);
+  width: 95vw;
+  max-width: 960px;
+  height: 88vh;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.8), 0 0 40px rgba(139, 92, 246, 0.2);
+  overflow: hidden;
+  animation: modalSlideUp 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.preview-modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 1.5rem;
+  background: rgba(255, 255, 255, 0.02);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+}
+
+.preview-title-wrap {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  min-width: 0;
+}
+
+.preview-header-icon {
+  color: var(--color-violet);
+  flex-shrink: 0;
+}
+
+.preview-filename {
+  font-size: 1.05rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 320px;
+}
+
+.preview-file-size {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+}
+
+.preview-header-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+.preview-tab-buttons {
+  display: flex;
+  background: rgba(255, 255, 255, 0.04);
+  padding: 3px;
+  border-radius: 8px;
+  border: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.tab-btn {
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  font-size: 0.8rem;
+  font-weight: 600;
+  padding: 0.35rem 0.8rem;
+  border-radius: 6px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  transition: all 0.2s ease;
+}
+
+.tab-btn.active {
+  background: var(--color-violet);
+  color: #ffffff;
+}
+
+.preview-modal-body {
+  flex: 1;
+  position: relative;
+  background: #090d16;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.preview-loading-state {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 1rem;
+  color: var(--text-secondary);
+}
+
+.spinner-large {
+  width: 36px;
+  height: 36px;
+  border: 3px solid rgba(255, 255, 255, 0.1);
+  border-top-color: var(--color-violet);
+  border-radius: 50%;
+  animation: spin 0.8s linear infinite;
+}
+
+.preview-iframe-wrapper {
+  width: 100%;
+  height: 100%;
+}
+
+.pdf-preview-iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+}
+
+.metadata-inspector-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 1.2rem;
+  width: 100%;
+  max-width: 800px;
+  padding: 2rem;
+  overflow-y: auto;
+}
+
+.meta-card {
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: var(--radius-md);
+  padding: 1.2rem;
+  display: flex;
+  align-items: flex-start;
+  gap: 0.9rem;
+}
+
+.meta-icon {
+  color: var(--color-violet);
+  flex-shrink: 0;
+  margin-top: 0.2rem;
+}
+
+.meta-info {
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+}
+
+.meta-label {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.meta-value {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  word-break: break-word;
+}
+
+/* ==========================================================================
+   PDF Encrypt Tool
+   ========================================================================== */
+.encrypt-tool-container {
+  background: rgba(18, 18, 24, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: var(--radius-lg);
+  padding: 2rem;
+  margin-bottom: 2rem;
+  backdrop-filter: blur(12px);
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.encrypt-tool-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 1rem;
+}
+
+.encrypt-tool-header .header-icon {
+  color: var(--color-violet);
+  background: rgba(139, 92, 246, 0.15);
+  padding: 0.6rem;
+  border-radius: 12px;
+  border: 1px solid rgba(139, 92, 246, 0.3);
+}
+
+.encrypt-tool-header h2 {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.encrypt-tool-header p {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  margin-top: 0.2rem;
+}
+
+.encrypt-dropzone {
+  border: 2px dashed rgba(139, 92, 246, 0.3);
+  background: rgba(255, 255, 255, 0.02);
+  border-radius: var(--radius-md);
+  padding: 2.5rem 1.5rem;
+  text-align: center;
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.encrypt-dropzone:hover, .encrypt-dropzone.has-file {
+  border-color: var(--color-violet);
+  background: rgba(139, 92, 246, 0.05);
+}
+
+.file-input-hidden {
+  display: none;
+}
+
+.encrypt-dropzone-label {
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.8rem;
+  color: var(--text-secondary);
+}
+
+.upload-icon {
+  color: var(--color-violet);
+}
+
+.file-preview-name {
+  color: var(--text-primary);
+  font-size: 0.95rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
+.change-file-hint {
+  font-size: 0.78rem;
+  color: var(--color-violet);
+}
+
+.encrypt-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.2rem;
+}
+
+.encrypt-actions {
+  display: flex;
+  gap: 0.8rem;
+  flex-wrap: wrap;
+}
+
+.security-note {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.8rem;
+  color: var(--color-emerald);
+  background: rgba(16, 185, 129, 0.08);
+  padding: 0.6rem 1rem;
+  border-radius: var(--radius-sm);
+  border: 1px solid rgba(16, 185, 129, 0.15);
+}
+
+/* ==========================================================================
+   Password Tool Modal (Strength & Generator)
+   ========================================================================== */
+.password-tool-modal-card {
+  background: rgba(18, 18, 24, 0.96);
+  border: 1px solid rgba(255, 255, 255, 0.12);
+  border-radius: var(--radius-lg);
+  width: 100%;
+  max-width: 480px;
+  padding: 1.8rem;
+  position: relative;
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
+  animation: modalSlideUp 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.tool-modal-body {
+  display: flex;
+  flex-direction: column;
+  gap: 1.4rem;
+  margin-top: 1rem;
+}
+
+.tool-section {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+}
+
+.tool-section h4 {
+  font-size: 0.95rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+}
+
+.strength-meter-bar {
+  height: 6px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 3px;
+  overflow: hidden;
+  margin-top: 0.4rem;
+}
+
+.strength-fill {
+  height: 100%;
+  transition: width 0.3s ease, background-color 0.3s ease;
+}
+
+.strength-meta {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  margin-top: 0.3rem;
+}
+
+.divider {
+  border: none;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.generator-controls {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.control-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+}
+
+.length-slider {
+  accent-color: var(--color-violet);
+  width: 140px;
+}
+
+.checkbox-row {
+  display: flex;
+  gap: 1.2rem;
+  font-size: 0.825rem;
+  color: var(--text-secondary);
+}
+
+.checkbox-row label {
+  display: flex;
+  align-items: center;
+  gap: 0.4rem;
+  cursor: pointer;
+}
+
+.generated-result-box {
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(139, 92, 246, 0.3);
+  border-radius: var(--radius-sm);
+  padding: 0.75rem 1rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.generated-text {
+  font-family: monospace;
+  font-size: 1.05rem;
+  color: #ffffff;
+  letter-spacing: 0.05em;
+  word-break: break-all;
+}
+
+.copy-btn {
+  background: transparent;
+  border: none;
+  color: var(--text-muted);
+  cursor: pointer;
+  padding: 0.3rem;
+  transition: color 0.2s ease;
+}
+
+.copy-btn:hover {
+  color: var(--text-primary);
+}
+
+
 

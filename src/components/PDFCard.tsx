@@ -25,9 +25,10 @@ interface PDFCardProps {
   fileState: PDFFileState;
   onRemove: (id: string) => void;
   onUnlock: (id: string, password: string) => Promise<void>;
+  onPreview?: (fileState: PDFFileState) => void;
 }
 
-export const PDFCard: React.FC<PDFCardProps> = ({ fileState, onRemove, onUnlock }) => {
+export const PDFCard: React.FC<PDFCardProps> = ({ fileState, onRemove, onUnlock, onPreview }) => {
   const { id, name, size, status, errorMessage, decryptedBytes, file } = fileState;
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
@@ -81,8 +82,13 @@ export const PDFCard: React.FC<PDFCardProps> = ({ fileState, onRemove, onUnlock 
     }, 2000);
   };
 
-  // Open decrypted PDF in a new tab to let user see it directly
+  // Open decrypted PDF in modal or new tab
   const handlePreview = () => {
+    if (onPreview) {
+      onPreview(fileState);
+      return;
+    }
+
     let url: string;
     if (status === 'success' && decryptedBytes) {
       const fileObj = new File([decryptedBytes as any], name.replace(/\.pdf$/i, '') + '_unlocked.pdf', { type: 'application/pdf' });
@@ -93,7 +99,6 @@ export const PDFCard: React.FC<PDFCardProps> = ({ fileState, onRemove, onUnlock 
 
     window.open(url, '_blank');
 
-    // Keep object URL active for browser tab rendering, then clean up
     setTimeout(() => {
       URL.revokeObjectURL(url);
     }, 30000);

@@ -1,16 +1,32 @@
 import React, { useState } from 'react';
-import { FileKey, LogIn, UserPlus, LogOut, History } from 'lucide-react';
+import { FileKey, LogIn, UserPlus, LogOut, History, KeyRound } from 'lucide-react';
 import { useAuth } from '../context/AuthContext';
 import { UserHistoryModal } from './UserHistoryModal';
+import { PasswordToolModal } from './PasswordToolModal';
 
 export const Header: React.FC = () => {
   const { user, history, openAuthModal, logout } = useAuth();
   const [isHistoryOpen, setIsHistoryOpen] = useState(false);
+  const [isPasswordToolOpen, setIsPasswordToolOpen] = useState(false);
 
   return (
     <header className="app-header" id="app-header-main">
-      {/* Top Bar for Auth controls */}
+      {/* Top Bar for Auth controls & Password Tool */}
       <div className="top-auth-bar" id="top-auth-bar">
+        <div style={{ display: 'flex', gap: '0.5rem', alignItems: 'center' }}>
+          <button
+            type="button"
+            className="history-pill-btn"
+            onClick={() => setIsPasswordToolOpen(true)}
+            id="btn-open-password-tool"
+            title="Open Password Generator & Strength Tool"
+            style={{ background: 'rgba(139, 92, 246, 0.12)', border: '1px solid rgba(139, 92, 246, 0.3)', color: '#a78bfa' }}
+          >
+            <KeyRound size={14} />
+            <span>Password Tools</span>
+          </button>
+        </div>
+
         {user ? (
           <div className="user-profile-menu" id="user-profile-menu">
             <button
@@ -85,6 +101,10 @@ export const Header: React.FC = () => {
 
       {/* Account history modal */}
       <UserHistoryModal isOpen={isHistoryOpen} onClose={() => setIsHistoryOpen(false)} />
+
+      {/* Password Security Tool modal */}
+      <PasswordToolModal isOpen={isPasswordToolOpen} onClose={() => setIsPasswordToolOpen(false)} />
     </header>
   );
 };
+
