@@ -5,10 +5,19 @@ import { Dropzone } from './components/Dropzone';
 import { PDFCard } from './components/PDFCard';
 import type { PDFFileState } from './components/PDFCard';
 import { SecurityBadge } from './components/SecurityBadge';
-import { Trash2, HelpCircle } from 'lucide-react';
+import { AuthProvider, useAuth } from './context/AuthContext';
+import { AuthModal } from './components/AuthModal';
+import { AuthGuard } from './components/AuthGuard';
+import { Trash2, HelpCircle, UserCheck } from 'lucide-react';
 
-function App() {
+function MainAppContent() {
   const [files, setFiles] = useState<PDFFileState[]>([]);
+  const { recordUnlockedFile, user } = useAuth();
+
+  // If user is not logged in, block access and display AuthGuard screen
+  if (!user) {
+    return <AuthGuard />;
+  }
 
   // Callback when files are selected or dropped
   const handleFilesSelected = (newFiles: File[]) => {
@@ -109,6 +118,9 @@ function App() {
         }
         return f;
       }));
+
+      // Record in user history if logged in
+      recordUnlockedFile(currentFileState.name, currentFileState.size);
     } catch (err: any) {
       console.error("Decryption failed for:", currentFileState.name, err);
       
@@ -141,6 +153,12 @@ function App() {
 
       {/* Security Level Indicator */}
       <SecurityBadge />
+
+      {/* Account session banner */}
+      <div className="user-session-banner" id="user-session-banner">
+        <UserCheck size={16} />
+        <span>Logged in as <strong>{user.name}</strong> ({user.email}). Unlocked PDFs are saved to your activity history.</span>
+      </div>
 
       {/* File Processing Dashboard */}
       {files.length > 0 ? (
@@ -194,7 +212,18 @@ function App() {
       <footer className="app-footer" id="app-footer-credits">
         <p>© {new Date().getFullYear()} UnPDF. Developed for offline, privacy-first PDF password removal.</p>
       </footer>
+
+      {/* Login & Sign Up Modal */}
+      <AuthModal />
     </div>
+  );
+}
+
+function App() {
+  return (
+    <AuthProvider>
+      <MainAppContent />
+    </AuthProvider>
   );
 }
 

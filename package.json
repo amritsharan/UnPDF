@@ -11,6 +11,8 @@
   },
   "dependencies": {
     "@pdfsmaller/pdf-decrypt": "^1.0.1",
+    "@rolldown/binding-win32-x64-msvc": "^1.2.7",
+    "lightningcss-win32-x64-msvc": "^1.33.0",
     "lucide-react": "^1.24.0",
     "pdf-lib": "^1.17.1",
     "react": "^19.2.7",
@@ -22,7 +24,7 @@
     "@types/react-dom": "^19.2.3",
     "@vitejs/plugin-react": "^6.0.3",
     "oxlint": "^1.71.0",
-    "typescript": "~6.0.2",
+    "typescript": "^7.0.2",
     "vite": "^8.1.1"
   }
 }
